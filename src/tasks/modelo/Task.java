@@ -4,12 +4,16 @@ import java.util.Calendar;
 
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Task {
 	private Long Id;
 	
 	@Size(min = 3, message="A descrição deve ter pelo menos 3 caracteres") // o "messagem" inclui uma mensagem de erro na execução do programa
 	private String descricao;
 	private boolean finalizada;
+	
+	@DateTimeFormat(pattern="dd/MM/yyy")
 	private Calendar dataFinalizacao; 				//utilizar o Calendar do java.util
 	
 	public Long getId() {

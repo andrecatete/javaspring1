@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>Task Cadastrada com sucesso!!</h1>
+<a href="gettasks">Listagem das tasks</a> 
 </body>
 </html>

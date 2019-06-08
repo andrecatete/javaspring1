@@ -1,6 +1,6 @@
 package tasks.dao;
 
-import tasks.jdbc.ConnectionFactory;
+//import tasks.jdbc.ConnectionFactory;
 import tasks.modelo.Task;
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,17 +11,32 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository			// 08/06
 public class TaskDao {
 
 	private final Connection connection;
 
-	public TaskDao() {
+	@Autowired		// 08/06
+	public TaskDao(DataSource dataSource) {		// 08/06
+//	public TaskDao(Connection connection) {		// 08/06
+//		try {
+//			this.connection = new ConnectionFactory().getConnection();
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//		this.connection = connection;
+		
 		try {
-			this.connection = new ConnectionFactory().getConnection();
+			this.connection = dataSource.getConnection();	// 08/06
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
 		}
-
 	}
 
 

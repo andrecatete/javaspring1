@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tasks.dao.TaskDao;
 import tasks.modelo.Task;
@@ -17,8 +19,10 @@ public class TasksController {
 	
 	private final TaskDao dao;
 	
-	public TasksController() {
-		dao = new TaskDao();
+	@Autowired
+	public TasksController(TaskDao dao) {
+//		dao = new TaskDao();		o @Autowired faz isso
+		this.dao = dao;
 	}
 	
 	@RequestMapping("novatask")					//escreve essa linha depois de colocar o return na linha abaixo da debaixo;
@@ -48,7 +52,9 @@ public class TasksController {
 		List<Task> tasks = dao.getTasks();
 		model.addAttribute(tasks);
 		model.addAttribute("tasks", dao.getTasks());
-		return "tasks/get-tasks";
+//		return "tasks/get-tasks";
+//		return "tasks/get-tasks-ajax";
+		return "tasks/get-tasks-ajax2";
 	}	
 	
 	@RequestMapping("excluitask")
@@ -68,6 +74,17 @@ public class TasksController {
 	public String edita(Task task) {
 		dao.edita(task);
 		return "redirect:gettasks";
+	}
+	
+//	@RequestMapping("finalizatask")
+//	public void finaliza(Long id) {
+//		dao.finaliza(id);		
+//	}
+	
+	@ResponseBody
+	@RequestMapping("finalizatask")
+	public void finaliza(Long id) {
+		dao.finaliza(id);		
 	}
 	
 }
