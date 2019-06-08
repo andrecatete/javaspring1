@@ -19,10 +19,10 @@ public class TasksController {
 	
 	private final TaskDao dao;
 	
-	@Autowired
+	@Autowired					// 08/06
 	public TasksController(TaskDao dao) {
 //		dao = new TaskDao();		o @Autowired faz isso
-		this.dao = dao;
+		this.dao = dao;			// 08/06
 	}
 	
 	@RequestMapping("novatask")					//escreve essa linha depois de colocar o return na linha abaixo da debaixo;
@@ -40,7 +40,7 @@ public class TasksController {
 		return "tasks/task-cadastrada";
 	}
 	
-	@RequestMapping("gettasks")
+	@RequestMapping("gettasks") //teste
 //	primeira opção usando model and view
 //	public String getTasks() {
 //		List<Task> task = dao.getTasks();
