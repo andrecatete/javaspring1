@@ -8,13 +8,16 @@
 <body>
 	<script type="text/javascript">
 		function finalizar(id) {
-			$.post("finalizatask", {'id' : id}, function() {
+			$.post("finalizatask", {'id' : id}, function(response) {
 				$("#task_"+id).html("Finalizada")
+				$("#task_data_"+id).html(response)
+				<!--alert(response);-->
+				<!--location.reload(true);-->
 			});
 		}
 	</script>
-	<a href="novatask">Inserir nova task</a>
-	<br /><br />
+<a href="novatask">Inserir nova task</a>
+<br /><br />
 <table border="1">
 	<tr>
 		<th>Id</th>
@@ -35,7 +38,7 @@
 		<c:if test="${task.finalizada eq true}">
 			<td>Finalizada</td>
 		</c:if>
-		<td>
+		<td id="task_data_${task.id}">
 		<fmt:formatDate value="${task.dataFinalizacao.time}" 
 		pattern="dd/MM/yyyy"/>
 		</td>
